@@ -28,13 +28,15 @@
         </div>
       </nav>
       <div class="container">
+        <div class="row">
+            <div class="col">
     <?php
-        $querys = DB::select("SELECT * FROM hardy_data WHERE StudentId = '03081200035'");
+        $querys = DB::select("SELECT * FROM data_hardy WHERE student_id = '03081200035'");
         foreach ($querys as $data) {
-            $studentid = $data->StudentID;
-            $nama = $data->Nama;
-            $kode_term = $data->kode_term;
-            $total_sks = $data->TOTAL_SKS;
+            $studentid = $data->student_id;
+            $nama = $data->nama;
+            $kode_term = $data->term;
+            $total_sks = $data->total_sks;
             echo "
                 <div class='row'>
                     <div class='col'>
@@ -71,6 +73,11 @@
             ";
         }
     ?>
+            </div>
+            <div class="col">
+                <img src="img/Hardy_03081200035.jpeg" width="200" height="200" class="img-thumbnail"/>
+            </div>
+        </div>
     </div>
     <br/>
     <br/>
@@ -81,20 +88,23 @@
             <th>Kode Matakuliah</th>
             <th>Nama Matakuliah</th>
             <th>SKS</th>
+            <th>Nilai</th>
         </tr>
         <?php
-            $matakuliah = DB::select("SELECT * FROM matakuliah_view WHERE StudentID = '03081200035'");
+            $matakuliah = DB::select("SELECT * FROM matkul_detail WHERE StudentID = '03081200035'");
             $no = 1;
             foreach($matakuliah as $kuliah){
-                $kode_matkul = $kuliah->KODE;
-                $nama_matkul = $kuliah->NAMA;
+                $kode_matkul = $kuliah->kode_matkul;
+                $nama_matkul = $kuliah->nama_matkul;
                 $sks = $kuliah->sks;
+                $huruf = $kuliah->huruf;
                 echo "
                     <tr>
                         <td>$no</td>
                         <td>$kode_matkul</td>
                         <td>$nama_matkul</td>
                         <td>$sks</td>
+                        <td>$huruf</td>
                     </tr>
                 ";
                 $no ++;
